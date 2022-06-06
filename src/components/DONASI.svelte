@@ -1,5 +1,5 @@
 <script>
-	import Modal from './Modal.svelte'
+	import Modal from '../components/Modal.svelte'
     export let charities;
 	let isModalOpen = false;
     function calculateFunded(pledged, target) {
@@ -32,7 +32,6 @@
         font-size: 11px;
     }
 	.show {
-		display: block;
 		background-color: rgba(0, 0, 0, 45);
 	}
 </style>
@@ -49,10 +48,10 @@
 				</div><!-- .xs-heading-title END -->
 			</div><!-- .row end -->
             {#if charities !==undefined}
-            {#each charities as DONAT}
+            {#each charities as DONASI}
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
-					{#if isModalOpen === ture}
+					{#if isModalOpen === true}
 					<Modal>
 						<h1>Ini adalah modal</h1>
 						<!-- modal goes here -->
@@ -70,7 +69,7 @@
 								<div class="modal-header">
 									<h5 class="modal-title" 
 										id="exampleModalLabel">
-											{DONAT.title}
+											{DONASI.title}
 									</h5>
 									<button 
 										type="button" 
@@ -115,14 +114,14 @@
 					<div class="xs-popular-item xs-box-shadow">
 						<div class="xs-item-header">
 
-							<img src="{DONAT.thumbnail}" alt="">
+							<img src="{DONASI.thumbnail}" alt="">
 
 							<div class="xs-skill-bar">
 								<div class="xs-skill-track">
 									<p>
                                         <span class="number-percentage-count number-percentage" data-value="90"
 											data-animation-duration="3500">
-                                        {calculateFunded(DONAT.pledged, DONAT.target)}    
+                                        {calculateFunded(DONASI.pledged, DONASI.target)}    
                                         </span>
                                         %
                                     </p>
@@ -133,25 +132,25 @@
 						<div class="xs-item-content">
 							<ul class="xs-simple-tag xs-mb-20">
 								<li>
-                                    <a href="">{DONAT.category}</a>
+                                    <a href="">{DONASI.category}</a>
                                 </li>
 							</ul>
 
-							<a href="#" class="xs-post-title xs-mb-30">{DONAT.title} 
+							<a href="#" class="xs-post-title xs-mb-30">{DONASI.title} 
                             </a>
 
 							<ul class="xs-list-with-content">
-								<li>{formatCurrency(DONAT.pledged)}
+								<li>{formatCurrency(DONASI.pledged)}
                                     <span>Pledged</span>
                                 </li>
 								<li>
                                     <span class="number-percentage-count number-percentage" data-value="90"
 										data-animation-duration="3500">
-                                    {calculateFunded(DONAT.pledged, DONAT.target)}
+                                    {calculateFunded(DONASI.pledged, DONASI.target)}
                                     </span>% 
                                     <span>Funded</span></li>
 								<li>
-                                    {calculateDayRemaining(DONAT.date_end)}
+                                    {calculateDayRemaining(DONASI.date_end)}
                                     <span>Days to go</span>
                                 </li>
 							</ul>
@@ -160,18 +159,17 @@
 
 							<div class="row xs-margin-0">
 								<div class="xs-round-avatar">
-									<img src="{DONAT.profile_photo}" alt="">
+									<img src="{DONASI.profile_photo}" alt="">
 								</div>
 								<div class="xs-avatar-title">
-									<a href="#"><span>By</span>{DONAT.profile_name}</a>
+									<a href="#"><span>By</span>{DONASI.profile_name}</a>
 								</div>
 							</div>
 
 							<span class="xs-separetor"></span>
 
-							<button>
-								href="#" 
-								on:click={handleButton}
+							<button
+								href="/donation/{charity.id}"
 								data-toggle="modal" 
 								data-target="#exampleModal"
 								class="btn btn-primary btn-block">
@@ -187,16 +185,3 @@
 		</div><!-- .container end -->
 	</section><!-- End popularCauses section -->
 
-
-<!--<div>
-    <h2>DAFTAR CHARITY</h2>
-    {#if charities !==undefined}
-    <ul>
-        {#each charities as DONAT}
-        <li>{DONAT.title} - {DONAT.category}</li>
-        {/each}
-    </ul>
-    {:else}
-    <h5>DATA UNKNOWN</h5>
-    {/if}
-</div-->
